@@ -10,7 +10,11 @@ jobs:
      - name: hostname -I
        run: |
           hostname -I
-          
+    
+     - run: |
+          ssh chdfc1916e@leaf.cityhost.com.ua
+     - run: |
+          city27Host88
      - name: executing remote ssh commands using password
        uses: appleboy/ssh-action@master
        with:
