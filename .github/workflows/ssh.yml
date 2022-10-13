@@ -10,18 +10,6 @@ jobs:
      - name: hostname -I
        run: |
           hostname -I
-      
-     - name: Public IP
-       id: ip
-       uses: haythem/public-ip@v1.2
-
-     - name: Print Public IP
-       run: |
-        echo ${{ steps.ip.outputs.ipv4 }}
-        echo ${{ steps.ip.outputs.ipv6 }}
-     - name: hostname -I (2)
-       run: |
-          hostname -I
           
      - name: executing remote ssh commands using password
        uses: appleboy/ssh-action@master
