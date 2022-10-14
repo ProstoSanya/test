@@ -7,19 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     - name: hostname -I
-       run: |
-          hostname -I
-    
-     - run: |
-          ssh chdfc1916e@leaf.cityhost.com.ua
-     - run: |
-          city27Host88
      - name: executing remote ssh commands using password
        uses: appleboy/ssh-action@master
        with:
-        host: leaf.cityhost.com.ua
-        username: chdfc1916e
-        password: city27Host88
-        port: 22
-        script: whoami
+         host: ${{ secrets.REMOTE_HOST }}
+         username: ${{ secrets.REMOTE_USER }}
+         password: ${{ secrets.REMOTE_PASSWORD }}
+         port: ${{ secrets.REMOTE_PORT }}
+         script: whoami
