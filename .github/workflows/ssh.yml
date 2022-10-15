@@ -13,8 +13,8 @@ jobs:
      - name: local remote scp
        uses: cross-the-world/scp-pipeline@master
        with:
-        host: ${{ secrets.DC_HOST }}
-        user: ${{ secrets.DC_USER }}
-        pass: ${{ secrets.DC_PASS }}
+        host: ${{ secrets.REMOTE_HOST }}
+        user: ${{ secrets.REMOTE_USER }}
+        pass: ${{ secrets.REMOTE_PASSWORD }}
         local: "./README.md"
         remote: "/test456"
