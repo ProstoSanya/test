@@ -14,7 +14,7 @@ jobs:
        uses: dj-256/github-deploy@v1
        with:
         local: "README.md"
-        remote: "/"
+        remote: "~/test_753"
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
