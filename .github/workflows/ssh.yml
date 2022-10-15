@@ -27,5 +27,4 @@ jobs:
          username: ${{ secrets.REMOTE_USER }}
          password: ${{ secrets.REMOTE_PASSWORD }}
          port: ${{ secrets.REMOTE_PORT }}
-         source: "README.md"
-         target: "C:\Users\Administrator\.ssh"
+         source: "test"
