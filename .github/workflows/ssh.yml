@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     - uses: actions/checkout@v1
+     - uses: actions/checkout@master
      - run: |
         ls
      - name: executing remote ssh commands using password
@@ -20,3 +20,12 @@ jobs:
          script: |
            whoami
            ls -al
+     - name: copy file via ssh password
+       uses: appleboy/scp-action@master
+       with:
+         host: ${{ secrets.REMOTE_HOST }}
+         username: ${{ secrets.REMOTE_USER }}
+         password: ${{ secrets.REMOTE_PASSWORD }}
+         port: ${{ secrets.REMOTE_PORT }}
+         source: "README.md"
+         target: ".ssh/"
