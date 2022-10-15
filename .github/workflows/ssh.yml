@@ -10,11 +10,11 @@ jobs:
      - uses: actions/checkout@master
      - run: |
         ls
-     - name: local remote scp
-       uses: cross-the-world/scp-pipeline@master
+     - name: copy using password
+       uses: srueda99/scp-action@v12
        with:
-        host: ${{ secrets.REMOTE_HOST }}
-        user: ${{ secrets.REMOTE_USER }}
-        pass: ${{ secrets.REMOTE_PASSWORD }}
-        local: "./README.md"
-        remote: "/test456"
+         host: ${{ secrets.REMOTE_HOST }}
+         port: ${{ secrets.REMOTE_PORT }}
+         username: ${{ secrets.REMOTE_USER }}
+         password: ${{ secrets.REMOTE_PASSWORD }}
+         destination: "/test998877/"
