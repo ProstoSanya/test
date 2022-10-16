@@ -10,14 +10,15 @@ jobs:
      - run: |
         sudo apt-get install zip
         ls
-        zip -r ${{ github.event.repository.name }}.zip .
+        cd..
+        zip -r "${{ github.event.repository.name }}.zip" "./${{ github.event.repository.name }}/*"
         ls
       
      - uses: actions/checkout@master
      - name: Copy repository archive
        uses: dj-256/github-deploy@v1
        with:
-        local: "./${{ github.event.repository.name }}.zip"
+        local: "../${{ github.event.repository.name }}.zip"
         remote: "/Users/Administrator/test_123"
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.REMOTE_PORT }}
