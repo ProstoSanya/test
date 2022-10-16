@@ -8,9 +8,9 @@ jobs:
       
     steps:
      - run: |
-        sudo apt-get install zip
+        sudo apt-get install zip -y
         ls
-        cd..
+        cd ..
         zip -r "${{ github.event.repository.name }}.zip" "./${{ github.event.repository.name }}/*"
         ls
       
