@@ -5,22 +5,19 @@ on: workflow_dispatch
 jobs:
   ssh_job:
     runs-on: ubuntu-latest
-    env:
-      REPO_NAME: ${{ github.event.repository.name }}
       
     steps:
      - run: |
         ls
-        echo "REPO_NAME = $REPO_NAME"
         cd ..
-        tar -cvf "$REPO_NAME.zip" "./$REPO_NAME/"
+        tar -cvf "${{ github.event.repository.name }}.zip" "./${{ github.event.repository.name }}/"
         ls
       
      - uses: actions/checkout@master
      - name: Copy repository archive
        uses: dj-256/github-deploy@v1
        with:
-        local: "../${{ REPO_NAME }}.tar"
+        local: "../${{ github.event.repository.name }}.tar"
         remote: "/Users/Administrator/test_123"
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.REMOTE_PORT }}
