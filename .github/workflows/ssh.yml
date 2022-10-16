@@ -24,8 +24,8 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
         port: ${{ secrets.REMOTE_PORT }}
-        source: "./${{ github.event.repository.name }}.zip"
-        target: "test_123"
+        source: "./*"
+        target: "test_12345"
         
      - name: executing remote ssh commands using password
        uses: appleboy/ssh-action@master
