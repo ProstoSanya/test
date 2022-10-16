@@ -17,7 +17,7 @@ jobs:
         zip -r ${{ github.event.repository.name }}.zip .
         ls
         
-     - name: copy file via ssh password
+     - name: Copy file via ssh password
        uses: appleboy/scp-action@master
        with:
         host: ${{ secrets.REMOTE_HOST }}
