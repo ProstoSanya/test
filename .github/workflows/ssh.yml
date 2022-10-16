@@ -7,14 +7,13 @@ jobs:
     runs-on: ubuntu-latest
       
     steps:
-     - uses: actions/checkout@v2
+     - uses: actions/checkout@master
      - run: |
         sudo apt-get install zip -y
         ls
-        zip -r ${{ github.event.repository.name }}.zip . --include **/dist/**
+        zip -r ${{ github.event.repository.name }}.zip .
         ls
-      
-     - uses: actions/checkout@master
+        
      - name: Copy repository archive
        uses: dj-256/github-deploy@v1
        with:
