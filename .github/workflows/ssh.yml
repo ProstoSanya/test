@@ -32,7 +32,6 @@ jobs:
          pass: ${{ secrets.REMOTE_PASSWORD}}
          command: |
           cd C:/Users/Administrator/
-          echo "%cd%"
           mkdir ${{ github.event.repository.name }}
           powershell -command " Expand-Archive -LiteralPath '${{ github.event.repository.name }}.zip' -DestinationPath '${{ github.event.repository.name }}' -Force "
           del /F "${{ github.event.repository.name }}.zip"
