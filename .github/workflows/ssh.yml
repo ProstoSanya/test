@@ -17,15 +17,15 @@ jobs:
         zip -r ${{ github.event.repository.name }}.zip .
         ls
         
-     - name: Copy repository archive
-       uses: dj-256/github-deploy@v1
+     - name: copy file via ssh password
+       uses: appleboy/scp-action@master
        with:
-        local: "./${{ github.event.repository.name }}.zip"
-        remote: "/Users/Administrator/test_123"
         host: ${{ secrets.REMOTE_HOST }}
-        port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
+        port: ${{ secrets.REMOTE_PORT }}
+        source: "./${{ github.event.repository.name }}.zip"
+        target: "test_123"
         
      - name: executing remote ssh commands using password
        uses: appleboy/ssh-action@master
