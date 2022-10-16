@@ -8,6 +8,7 @@ jobs:
     
     env:
       REPO_NAME: ${{ github.event.repository.name }}
+      USER_DIR: "Users/Administrator/"
       
     steps:
      - name: Use Checkout Action
@@ -25,7 +26,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
         local: "./${{ env.REPO_NAME }}.zip"
-        remote: "/Users/Administrator/"
+        remote: ${{ env.USER_DIR }}
         
      - name: Unzip files
        uses: fifsky/ssh-action@master
@@ -34,7 +35,8 @@ jobs:
          user: ${{ secrets.REMOTE_USER }}
          pass: ${{ secrets.REMOTE_PASSWORD}}
          command: |
-          cd C:/Users/Administrator/
-          mkdir ${{ github.event.repository.name }}
-          powershell -command " Expand-Archive -LiteralPath '${{ github.event.repository.name }}.zip' -DestinationPath '${{ github.event.repository.name }}' -Force "
-          del /F "${{ github.event.repository.name }}.zip"
+          cd C:/
+          cd ${{ env.USER_DIR }}
+          mkdir ${{ env.REPO_NAME }}
+          powershell -command " Expand-Archive -LiteralPath '${{ env.REPO_NAME }}.zip' -DestinationPath '${{ env.REPO_NAME }}' -Force "
+          del /F "${{ env.REPO_NAME }}.zip"
