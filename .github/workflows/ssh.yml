@@ -21,7 +21,7 @@ jobs:
        uses: dj-256/github-deploy@v1
        with:
         local: "./${{ github.event.repository.name }}.zip"
-        remote: "/Users/Administrator/test_123"
+        remote: "/Users/Administrator/"
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
@@ -31,7 +31,10 @@ jobs:
        uses: fifsky/ssh-action@master
        with:
          command: |
+          cd C:/Users/Administrator/
           echo "%cd%"
+          mkdir ${{ github.event.repository.name }}
+          unzip ${{ github.event.repository.name }}.zip -d ${{ github.event.repository.name }}
          host: ${{ secrets.REMOTE_HOST }}
          user: ${{ secrets.REMOTE_USER }}
          pass: ${{ secrets.REMOTE_PASSWORD}}
