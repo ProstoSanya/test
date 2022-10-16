@@ -9,15 +9,14 @@ jobs:
     steps:
      - run: |
         ls
-        cd ..
-        tar -cvf "${{ github.event.repository.name }}.tar" "./${{ github.event.repository.name }}/"
+        zip -rv "${{ github.event.repository.name }}.zip"
         ls
       
      - uses: actions/checkout@master
      - name: Copy repository archive
        uses: dj-256/github-deploy@v1
        with:
-        local: "../${{ github.event.repository.name }}.tar"
+        local: "./${{ github.event.repository.name }}.zip"
         remote: "/Users/Administrator/test_123"
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.REMOTE_PORT }}
