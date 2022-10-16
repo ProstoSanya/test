@@ -13,7 +13,7 @@ jobs:
         ls
         echo "REPO_NAME = $REPO_NAME"
         cd ..
-        zip -rv "$REPO_NAME.zip" "./$REPO_NAME/*"
+        zip -rv "$REPO_NAME.zip" "./$REPO_NAME/"
         ls
       
      - uses: actions/checkout@master
