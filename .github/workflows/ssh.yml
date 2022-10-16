@@ -14,11 +14,11 @@ jobs:
      - name: Use Checkout Action
        uses: actions/checkout@master
      
-     - name: Zip repository files
+     - name: Add repository files to archive
        run: |
         zip -r ${{ env.REPO_NAME }}.zip .
         
-     - name: Copy repository archive
+     - name: Deploy archive
        uses: dj-256/github-deploy@v1
        with:
         host: ${{ secrets.REMOTE_HOST }}
@@ -28,7 +28,7 @@ jobs:
         local: "./${{ env.REPO_NAME }}.zip"
         remote: "/${{ env.USER_DIR }}"
         
-     - name: Unzip files
+     - name: Unzip files from archive
        uses: fifsky/ssh-action@master
        with:
          host: ${{ secrets.REMOTE_HOST }}
