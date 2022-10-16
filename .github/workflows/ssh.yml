@@ -10,7 +10,7 @@ jobs:
      - run: |
         ls
         cd ..
-        tar -cvf "${{ github.event.repository.name }}.zip" "./${{ github.event.repository.name }}/"
+        tar -cvf "${{ github.event.repository.name }}.tar" "./${{ github.event.repository.name }}/"
         ls
       
      - uses: actions/checkout@master
