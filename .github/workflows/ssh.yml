@@ -11,7 +11,7 @@ jobs:
     steps:
      - run: |
         ls
-        echo "REPO_NAME = ${{ REPO_NAME }}"
+        echo "REPO_NAME = $REPO_NAME"
         cd ..
         zip -rv "$REPO_NAME.zip" "$REPO_NAME"
         ls
