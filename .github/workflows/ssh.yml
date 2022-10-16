@@ -3,8 +3,11 @@ name: TEST_SSH
 on: workflow_dispatch
 
 jobs:
-  ssh_job:
+  ssh_deploy:
     runs-on: ubuntu-latest
+    
+    env:
+      REPO_NAME: ${{ github.event.repository.name }}
       
     steps:
      - name: Use Checkout Action
@@ -12,7 +15,7 @@ jobs:
      
      - name: Zip repository files
        run: |
-        zip -r ${{ github.event.repository.name }}.zip .
+        zip -r $REPO_NAME.zip .
         
      - name: Copy repository archive
        uses: dj-256/github-deploy@v1
@@ -21,7 +24,7 @@ jobs:
         port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        local: "./${{ github.event.repository.name }}.zip"
+        local: "./$REPO_NAME.zip"
         remote: "/Users/Administrator/"
         
      - name: Unzip files
