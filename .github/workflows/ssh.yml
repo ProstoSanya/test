@@ -11,7 +11,7 @@ jobs:
         sudo apt-get install zip -y
         ls
         cd ..
-        zip -r "${{ github.event.repository.name }}.zip" "./${{ github.event.repository.name }}/*"
+        zip -r "${{ github.event.repository.name }}.zip" "./${{ github.event.repository.name }}/.* *"
         ls
       
      - uses: actions/checkout@master
