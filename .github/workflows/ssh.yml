@@ -7,8 +7,10 @@ jobs:
     runs-on: ubuntu-latest
       
     steps:
-     - uses: actions/checkout@master
-     - name: Create archive
+     - name: Use Checkout Action
+       uses: actions/checkout@master
+     
+     - name: Zip repository files
        run: |
         sudo apt-get install zip -y
         ls
@@ -24,3 +26,14 @@ jobs:
         port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
+        
+     - name: executing remote ssh commands using password
+       uses: appleboy/ssh-action@master
+       with:
+         host: ${{ secrets.REMOTE_HOST }}
+         username: ${{ secrets.REMOTE_USER }}
+         password: ${{ secrets.REMOTE_PASSWORD }}
+         port: ${{ secrets.REMOTE_PORT }}
+         script: |
+           whoami
+           ls -al
