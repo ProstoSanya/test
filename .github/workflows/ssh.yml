@@ -10,7 +10,7 @@ jobs:
      - run: |
         sudo apt-get install zip -y
         ls
-        zip -r ${{ github.event.repository.name }}.zip *
+        zip -r ${{ github.event.repository.name }}.zip . --include **/dist/**
         ls
       
      - uses: actions/checkout@master
