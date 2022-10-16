@@ -12,29 +12,27 @@ jobs:
      
      - name: Zip repository files
        run: |
-        sudo apt-get install zip -y
-        ls
         zip -r ${{ github.event.repository.name }}.zip .
-        ls
         
      - name: Copy repository archive
        uses: dj-256/github-deploy@v1
        with:
-        local: "./${{ github.event.repository.name }}.zip"
-        remote: "/Users/Administrator/"
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
+        local: "./${{ github.event.repository.name }}.zip"
+        remote: "/Users/Administrator/"
         
-     - name: ls -a via ssh
+     - name: Unzip files
        uses: fifsky/ssh-action@master
        with:
+         host: ${{ secrets.REMOTE_HOST }}
+         user: ${{ secrets.REMOTE_USER }}
+         pass: ${{ secrets.REMOTE_PASSWORD}}
          command: |
           cd C:/Users/Administrator/
           echo "%cd%"
           mkdir ${{ github.event.repository.name }}
           powershell -command " Expand-Archive -LiteralPath '${{ github.event.repository.name }}.zip' -DestinationPath '${{ github.event.repository.name }}' -Force "
-         host: ${{ secrets.REMOTE_HOST }}
-         user: ${{ secrets.REMOTE_USER }}
-         pass: ${{ secrets.REMOTE_PASSWORD}}
+          del /F "${{ github.event.repository.name }}.zip"
