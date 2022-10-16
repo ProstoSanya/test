@@ -35,5 +35,4 @@ jobs:
          password: ${{ secrets.REMOTE_PASSWORD }}
          port: ${{ secrets.REMOTE_PORT }}
          script: |
-           whoami
-           ls -al
+           echo "%cd%"
