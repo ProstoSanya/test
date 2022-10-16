@@ -26,7 +26,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
         local: "./${{ env.REPO_NAME }}.zip"
-        remote: ${{ env.USER_DIR }}
+        remote: "/${{ env.USER_DIR }}"
         
      - name: Unzip files
        uses: fifsky/ssh-action@master
