@@ -8,8 +8,9 @@ jobs:
       
     steps:
      - run: |
+        sudo apt-get install zip
         ls
-        zip -r "${{ github.event.repository.name }}.zip"
+        zip -r "${{ github.event.repository.name }}.zip" "."
         ls
       
      - uses: actions/checkout@master
