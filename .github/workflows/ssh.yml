@@ -34,7 +34,7 @@ jobs:
           cd C:/Users/Administrator/
           echo "%cd%"
           mkdir ${{ github.event.repository.name }}
-          unzip ${{ github.event.repository.name }}.zip -d ${{ github.event.repository.name }}
+          powershell -command " Expand-Archive -LiteralPath '${{ github.event.repository.name }}.zip' -DestinationPath '${{ github.event.repository.name }}' -Force "
          host: ${{ secrets.REMOTE_HOST }}
          user: ${{ secrets.REMOTE_USER }}
          pass: ${{ secrets.REMOTE_PASSWORD}}
