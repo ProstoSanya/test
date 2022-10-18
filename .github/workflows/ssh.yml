@@ -6,6 +6,9 @@ jobs:
   ssh_deploy:
     runs-on: ubuntu-latest
     
+    env:
+      REPO_NAME: ${{ github.event.repository.name }}
+    
     steps:
      - name: Use Checkout Action
        uses: actions/checkout@master
@@ -18,4 +21,4 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "*"
-        target: "test60106"
+        target: "~/projects/${{ env.REPO_NAME }}"
