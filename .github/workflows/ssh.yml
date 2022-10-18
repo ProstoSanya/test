@@ -12,6 +12,10 @@ jobs:
     steps:
      - name: Use Checkout Action
        uses: actions/checkout@master
+     - name: Repo Name to Lower Case
+       run: |
+         REPO_NAME=$(echo 'console.log("${{ github.event.repository.name }}".toUpperCase())' | node -)
+         echo $REPO_NAME
      
      - name: copy file via ssh password
        uses: appleboy/scp-action@master
@@ -21,4 +25,4 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "*"
-        target: "~/projects/${{ env.REPO_NAME }}"
+        target: "~/projects/$REPO_NAME"
