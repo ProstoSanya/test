@@ -6,37 +6,15 @@ jobs:
   ssh_deploy:
     runs-on: ubuntu-latest
     
-    env:
-      REPO_NAME: ${{ github.event.repository.name }}
-      USER_DIR: "Users/Administrator/"
-      
     steps:
      - name: Use Checkout Action
        uses: actions/checkout@master
      
-     - name: Add repository files to archive
-       run: |
-        zip -r ${{ env.REPO_NAME }}.zip .
-        
-     - name: Deploy archive
-       uses: dj-256/github-deploy@v1
-       with:
-        host: ${{ secrets.REMOTE_HOST }}
-        port: ${{ secrets.REMOTE_PORT }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PASSWORD }}
-        local: "./${{ env.REPO_NAME }}.zip"
-        remote: "/${{ env.USER_DIR }}"
-        
-     - name: Unzip files from archive
-       uses: fifsky/ssh-action@master
-       with:
-         host: ${{ secrets.REMOTE_HOST }}
-         user: ${{ secrets.REMOTE_USER }}
-         pass: ${{ secrets.REMOTE_PASSWORD}}
-         command: |
-          cd C:/
-          cd ${{ env.USER_DIR }}
-          mkdir ${{ env.REPO_NAME }}
-          powershell -command " Expand-Archive -LiteralPath '${{ env.REPO_NAME }}.zip' -DestinationPath '${{ env.REPO_NAME }}' -Force "
-          del /F "${{ env.REPO_NAME }}.zip"
+     - name: Deploy to Server
+       uses: easingthemes/ssh-deploy@main
+       env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          EXCLUDE: "/dist/, /node_modules/"
