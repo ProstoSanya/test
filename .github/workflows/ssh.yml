@@ -19,7 +19,7 @@ jobs:
        
      - name: downcase REPO
        run: |
-         echo "REPO=${GITHUB_REPOSITORY,,}" >>${{ github.event.repository.name }}
+         echo "REPO=${{ github.event.repository.name }}" >>${GITHUB_ENV}
      - name: use REPO
        run: |
          echo "The value of REPO is: ${REPO}"
