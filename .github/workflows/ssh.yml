@@ -7,14 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      REPO_NAME: ${{ github.event.repository.name }}
+      REPO_NAME_2: ${{ github.event.repository.name }}
     
     steps:
      - name: Use Checkout Action
        uses: actions/checkout@master
      - name: Repo Name to Lower Case
        run: |
-         REPO_NAME=$(echo 'console.log("${{ github.event.repository.name }}".toUpperCase())' | node -)
+         REPO_NAME=$(echo 'console.log("${{ github.event.repository.name }}".toLowerCase())' | node -)
          echo $REPO_NAME
      
      - name: copy file via ssh password
@@ -25,4 +25,4 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "*"
-        target: "~/projects/$REPO_NAME"
+        target: "~/projects/${{ REPO_NAME }}"
