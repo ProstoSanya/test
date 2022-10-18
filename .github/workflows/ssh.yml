@@ -19,7 +19,7 @@ jobs:
        
      - name: downcase REPO
        run: |
-         echo "REPO = ${GITHUB_REPOSITORY,,}" >> ${{ github.event.repository.name }}
+         echo "REPO=${GITHUB_REPOSITORY,,}" >>${{ github.event.repository.name }}
      - name: use REPO
        run: |
          echo "The value of REPO is: ${REPO}"
@@ -32,4 +32,4 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "*"
-        target: "~/projects/${{ env.REPO_NAME }}/"
+        target: "~/projects/${REPO}/"
