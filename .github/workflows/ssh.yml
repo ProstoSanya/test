@@ -22,7 +22,7 @@ jobs:
          echo "REPO=${{ github.event.repository.name }}" >>${GITHUB_ENV}
      - name: use REPO
        run: |
-         echo "The value of REPO is: ${REPO}"
+         echo "The value of REPO is: ${REPO} || ${{ env.REPO }}"
      
      - name: copy files via key
        uses: appleboy/scp-action@master
@@ -32,4 +32,4 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "*"
-        target: "~/projects/${REPO}/"
+        target: "~/projects/${{ env.REPO }}/"
