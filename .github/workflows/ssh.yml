@@ -17,7 +17,7 @@ jobs:
          REPO_NAME=$(echo 'console.log("${{ github.event.repository.name }}".toLowerCase())' | node -)
          echo $REPO_NAME
      
-     - name: copy file via ssh password
+     - name: copy files via key
        uses: appleboy/scp-action@master
        with:
         host: ${{ secrets.REMOTE_HOST }}
@@ -25,4 +25,4 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "*"
-        target: "~/projects/${REPO_NAME}/"
+        target: "~/projects/${{ env.REPO_NAME }}/"
