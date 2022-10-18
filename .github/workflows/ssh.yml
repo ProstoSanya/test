@@ -16,6 +16,13 @@ jobs:
        run: |
          REPO_NAME=$(echo 'console.log("${{ github.event.repository.name }}".toLowerCase())' | node -)
          echo $REPO_NAME
+       
+     - name: downcase REPO
+       run: |
+         echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+     - name: use REPO
+       run: |
+         echo "The value of REPO is: ${REPO}"
      
      - name: copy files via key
        uses: appleboy/scp-action@master
