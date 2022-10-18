@@ -25,4 +25,4 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "*"
-        target: "~/projects/${{ env.REPO_NAME }}/"
+        target: "~/projects/${REPO_NAME}/"
