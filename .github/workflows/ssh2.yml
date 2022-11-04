@@ -24,12 +24,12 @@ jobs:
          port: ${{ secrets.REMOTE_PORT }}
          user: ${{ secrets.REMOTE_USER }}
          key: ${{ secrets.SSH_PRIVATE_KEY }}
-         connect_timeout: 10s
+         connect_timeout: 15s
          scp: |
            "*" => "~/projects/${{ env.REPO_NAME }}/"
          last_ssh: |
-           pwd
            cd ~/projects/${{ env.REPO_NAME }}/
            pwd
            npm install
            ls -a
+           pm2 delete -s ${{ env.REPO_NAME }} || : && pm2 start npm --name "${{ env.REPO_NAME }}" -- start
