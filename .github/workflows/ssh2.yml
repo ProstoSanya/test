@@ -19,9 +19,6 @@ jobs:
 
      - name: ssh scp ssh pipelines
        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-       env:
-         WELCOME: "ssh scp ssh pipelines"
-         LASTSSH: "Doing something after copying"
        with:
          host: ${{ secrets.REMOTE_HOST }}
          port: ${{ secrets.REMOTE_PORT }}
@@ -31,7 +28,6 @@ jobs:
          scp: |
            "*" => "~/projects/${{ env.REPO_NAME }}/"
          last_ssh: |
-           echo $LASTSSH
            pwd
            cd ~/projects/${{ env.REPO_NAME }}/
            pwd
