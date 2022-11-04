@@ -1,0 +1,39 @@
+name: TEST_SSH
+
+on: workflow_dispatch
+
+jobs:
+  ssh_deploy:
+    runs-on: ubuntu-latest
+    
+    env:
+      REPO_NAME_2: ${{ github.event.repository.name }}
+    
+    steps:
+     - name: Use Checkout Action
+       uses: actions/checkout@master
+     - name: Repo Name to Lower Case
+       run: |
+         echo "REPO_NAME=$(echo 'console.log("${{ github.event.repository.name }}".toLowerCase())' | node -)" >>${GITHUB_ENV}
+         echo $REPO_NAME
+
+     - name: ssh scp ssh pipelines
+       uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+       env:
+         WELCOME: "ssh scp ssh pipelines"
+         LASTSSH: "Doing something after copying"
+       with:
+         host: ${{ secrets.REMOTE_HOST }}
+         port: ${{ secrets.REMOTE_PORT }}
+         user: ${{ secrets.REMOTE_USER }}
+         key: ${{ secrets.SSH_PRIVATE_KEY }}
+         connect_timeout: 10s
+         scp: |
+           "*" => "~/projects/${{ env.REPO_NAME }}/"
+         last_ssh: |
+           echo $LASTSSH
+           pwd
+           cd ~/projects/${{ env.REPO_NAME }}/
+           pwd
+           npm install
+           ls -a
