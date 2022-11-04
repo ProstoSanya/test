@@ -1,4 +1,4 @@
-name: TEST_SSH
+name: TEST_SSH_2
 
 on: workflow_dispatch
 
